@@ -16,19 +16,21 @@ function processFile(content, cpu, onComplete) {
     // Loop through each line of machine code
 
     for (let line of lines) {
-
         // !!! IMPLEMENT ME
-
+        
         // Strip comments
+        const commentIndex = line.indexOf('#');
 
         // Remove whitespace from either end of the line
-
+        line = line.trim();
         // Ignore empty lines
-
+        if (line = '') {
+            continue;
+        }
         // Convert from binary string to numeric value
-
+        const binary = line.toString(2);
         // Store in the CPU with the .poke() function
-
+        CPU.poke(curAddr, binary);
         // And on to the next one
         curAddr++;
     }

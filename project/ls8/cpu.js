@@ -8,9 +8,9 @@ const fs = require('fs');
 
 const HLT  = 0b00000001; // Halt CPU
 // !!! IMPLEMENT ME
-// LDI
-// MUL
-// PRN
+const LDI = 0b10011001; // Load Immediate to the register
+const MUL = 0b10101010; //
+const PRN = 0b01000011;
 
 /**
  * Class for simulating a simple Computer (CPU & memory)
@@ -26,7 +26,7 @@ class CPU {
         this.reg = new Array(8).fill(0); // General-purpose registers
         
         // Special-purpose registers
-        this.reg.PC = 0; // Program Counter
+        this.reg.PC = 0; // Program Counter keeps track where we are in memory or IP 
         this.reg.IR = 0; // Instruction Register
 
 		this.setupBranchTable();
@@ -41,6 +41,7 @@ class CPU {
         bt[HLT] = this.HLT;
         // !!! IMPLEMENT ME
         // LDI
+        bt[LDI] = this.LDI;
         // MUL
         // PRN
 
@@ -109,7 +110,7 @@ class CPU {
         handler.call(this, operandA, operandB);
 
         // Increment the PC register to go to the next instruction
-        // !!! IMPLEMENT ME
+        // !!! IMPLEMENT ME Look at the value oif the first 2 bits which show how many operand we have 
     }
 
     // INSTRUCTION HANDLER CODE:
@@ -122,10 +123,11 @@ class CPU {
     }
 
     /**
-     * LDI R,I
+     * LDI R,I R for Register Number I for rInteger
      */
     LDI(reg, value) {
         // !!! IMPLEMENT ME
+        this.reg[reg] = value;
     }
 
     /**
